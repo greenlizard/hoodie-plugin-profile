@@ -30,11 +30,24 @@ suite('Profile', function () {
         })
         .then(function (task) {
           done();
-          assert.ok(true, 'getProfile');
+          assert.ok((task.profile.username ==='hommer'), 'getProfile');
         });
     });
 
-    
+    test('hommer should get by username liza', function (done) {
+      this.timeout(10000);
+      hoodie.profile.getByUserName('liza')
+        .fail(function (err) {
+          done();
+          assert.ok(false, err.message);
+        })
+        .then(function (task) {
+          done();
+          assert.ok((task.profile.username ==='liza'), 'getProfile');
+        });
+    });
+
+
 
   });
 

@@ -61,12 +61,32 @@ Hoodie.extend(function (hoodie) {
       return defer.promise();
     },
 
+    getByUserName: function (username) {
+      var defer = window.jQuery.Deferred();
+      defer.notify('get', arguments, false);
+      if (!!username) {
+        var task = {
+          get: {
+            username: username
+          }
+        };
+        hoodie.task('profilegetbyusername').start(task)
+          .then(defer.resolve)
+          .fail(defer.reject);
+      } else {
+        defer.reject('must be pass username as a parameter');
+      }
+      return defer.promise();
+    },
+  
     get: function (userId) {
       var defer = window.jQuery.Deferred();
       defer.notify('get', arguments, false);
       if (!!userId) {
         var task = {
-          userId: userId
+          get: {
+            userId: userId
+          }
         };
         hoodie.task('profileget').start(task)
           .then(defer.resolve)
