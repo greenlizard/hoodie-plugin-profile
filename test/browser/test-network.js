@@ -8,8 +8,8 @@ suite('Profile', function () {
       this.timeout(10000);
       hoodie.account.signIn('Hommer', '123')
         .fail(function (err) {
-          done();
           assert.ok(false, err.message);
+          done();
         })
         .done(function () {
           assert.equal(
@@ -25,29 +25,52 @@ suite('Profile', function () {
       this.timeout(10000);
       hoodie.profile.get()
         .fail(function (err) {
-          done();
           assert.ok(false, err.message);
+          done();
         })
         .then(function (task) {
-          done();
           assert.ok((task.profile.username ==='hommer'), 'getProfile');
-        });
+          done();
+        })
     });
 
-    test('hommer should get by username liza', function (done) {
+    test('hommer should get by username lisa', function (done) {
       this.timeout(10000);
-      hoodie.profile.getByUserName('liza')
+      hoodie.profile.getByUserName('lisa')
         .fail(function (err) {
-          done();
           assert.ok(false, err.message);
+          done();
         })
         .then(function (task) {
+          assert.ok((task.profile.username ==='lisa'), 'getProfile');
           done();
-          assert.ok((task.profile.username ==='liza'), 'getProfile');
         });
     });
 
 
+    test('hommer should update own profile', function (done) {
+      this.timeout(10000);
+      hoodie.profile.get()
+        .fail(function (err) {
+          assert.ok(false, err.message);
+          done();
+        })
+        .then(function (_task) {
+          var profile = _task.profile;
+          profile.First_Name = 'Hommer';
+          profile.Last_Name = 'Simpson';
+          hoodie.profile.set(profile)
+            .fail(function (err) {
+              assert.ok(false, err.message);
+              done();
+            })
+            .then(function () { return hoodie.profile.get(); })
+            .then(function (task) {
+              assert.ok((task.profile.Last_Name ==='Simpson'), 'getProfile');
+              done();
+            });
+        })
+    });
 
   });
 
