@@ -10,20 +10,20 @@ Hoodie.extend(function (hoodie) {
 
   hoodie.profile = {
 
-    getByUserName: function (username) {
+    getByUserName: function (userName) {
       var defer = window.jQuery.Deferred();
       defer.notify('getByUserName', arguments, false);
-      if (!!username) {
+      if (!!userName) {
         var task = {
           get: {
-            username: username
+            userName: userName
           }
         };
         hoodie.task('profilegetbyusername').start(task)
           .then(defer.resolve)
           .fail(defer.reject);
       } else {
-        defer.reject('must be pass username as a parameter');
+        defer.reject('must be pass userName as a parameter');
       }
       return defer.promise();
     },
