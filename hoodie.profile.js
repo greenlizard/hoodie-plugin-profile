@@ -15,7 +15,7 @@ Hoodie.extend(function (hoodie) {
       defer.notify('getByUserName', arguments, false);
       if (!!userName) {
         var task = {
-          get: {
+          profile: {
             userName: userName
           }
         };
@@ -33,7 +33,7 @@ Hoodie.extend(function (hoodie) {
       defer.notify('get', arguments, false);
       if (!!userId) {
         var task = {
-          get: {
+          profile: {
             userId: userId
           }
         };
