@@ -4,6 +4,19 @@ suite('Profile', function () {
   suiteSetup(loadUsers);
   suite('Profile test', function () {
 
+    test('anonymous user not should get own profile', function (done) {
+      this.timeout(10000);
+      hoodie.profile.get()
+        .fail(function (err) {
+          done();
+          assert.ok(true, err.message);
+        })
+        .then(function (task) {
+          done('user should not get own profile');
+          assert.ok(false, 'user should not get own profile');
+        })
+    });
+
     test('signIn hommer', function (done) {
       this.timeout(10000);
       hoodie.account.signIn('Hommer', '123')

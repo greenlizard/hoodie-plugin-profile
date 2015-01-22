@@ -45,7 +45,9 @@ Hoodie.extend(function (hoodie) {
           .then(function (doc) {
             defer.resolve({ profile: doc });
           })
-          .fail(defer.reject);
+          .fail(function (err) {
+            defer.reject(err);
+          });
       }
       return defer.promise();
     },
