@@ -55,7 +55,7 @@ Hoodie.extend(function (hoodie) {
     set: function (profile) {
       var defer = window.jQuery.Deferred();
       defer.notify('set', arguments, false);
-      hoodie.store.save('profile', profile.id, profile)
+      hoodie.store.save('profile', profile.userId, profile)
         .then(defer.resolve)
         .fail(defer.reject);
       return defer.promise();
