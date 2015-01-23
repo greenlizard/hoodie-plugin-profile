@@ -1,6 +1,6 @@
 {
   "name": "hoodie-plugin-profile",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Profile Hoodie plugin",
   "main": "worker.js",
   "dependencies": {
@@ -45,6 +45,12 @@
     ],
     "hoodiejs": "node_modules/hoodie/src/hoodie.js"
   },
+  "keywords": [
+    "hoodie",
+    "profile",
+    "goappes",
+    "plugin"
+  ],
   "scripts": {
     "test": "grunt test"
   },
