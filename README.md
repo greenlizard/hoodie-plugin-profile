@@ -4,6 +4,9 @@ hoodie-plugin-profile
 [![Build Status](https://travis-ci.org/goappes/hoodie-plugin-profile.svg?branch=master)](https://travis-ci.org/goappes/hoodie-plugin-profile) [![Dependencies](https://david-dm.org/goappes/hoodie-plugin-profile.png)](https://david-dm.org/goappes/hoodie-plugin-profile) [![devDependency Status](https://david-dm.org/goappes/hoodie-plugin-profile/dev-status.svg)](https://david-dm.org/goappes/hoodie-plugin-profile#info=devDependencies) [![Code Climate](https://codeclimate.com/github/goappes/hoodie-plugin-notification/badges/gpa.svg)](https://codeclimate.com/github/goappes/hoodie-plugin-profile)
 
 ## Dependencies
+
+install this: https://github.com/rnewson/couchdb-lucene
+
 ```shell
   hoodie install hoodie-plugin-profile
 ```
