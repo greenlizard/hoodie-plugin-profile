@@ -16,10 +16,6 @@ module.exports = function (hoodie, callback) {
 
   var profile = new Profile(hoodie);
 
-  // hoodie.task.on('subscribe:add', profile.subscribe);
-  // hoodie.task.on('unsubscribe:add', profile.unsubscribe);
-  // hoodie.task.on('subscribers:add', profile.subscribers);
-  // hoodie.task.on('subscriptions:add', profile.subscriptions);
   hoodie.task.on('profileget:add', profile.get);
   hoodie.task.on('profilegetbyusername:add', profile.getByUserName);
 

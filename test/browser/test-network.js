@@ -47,16 +47,29 @@ suite('Profile', function () {
         })
     });
 
+    test('hommer should get by getUserId lisa', function (done) {
+      this.timeout(15000);
+      hoodie.profile.get(_.find(window.fixtures.users, { username: 'Lisa' }).hoodieId)
+        .fail(function (err) {
+          assert.ok(false, err.message);
+          done();
+        })
+        .then(function (task) {
+          done();
+          assert.ok((task.profile.userName ==='lisa'), 'getProfile');
+        });
+    });
+
     test('hommer should get by userName lisa', function (done) {
-      this.timeout(10000);
+      this.timeout(15000);
       hoodie.profile.getByUserName('lisa')
         .fail(function (err) {
           assert.ok(false, err.message);
           done();
         })
         .then(function (task) {
-          assert.ok((task.profile.userName ==='lisa'), 'getProfile');
           done();
+          assert.ok((task.profile.userName ==='lisa'), 'getProfile');
         });
     });
 
