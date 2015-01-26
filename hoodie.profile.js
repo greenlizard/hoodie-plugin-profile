@@ -10,6 +10,20 @@ Hoodie.extend(function (hoodie) {
 
   hoodie.profile = {
 
+    search: function (term) {
+      var defer = window.jQuery.Deferred();
+      defer.notify('profilesearch', arguments, false);
+      var task = {
+        profile: {
+          term: term + '*'
+        }
+      };
+      hoodie.task('profilesearch').start(task)
+        .then(defer.resolve)
+        .fail(defer.reject);
+      return defer.promise();
+    },
+
     getByUserName: function (userName) {
       var defer = window.jQuery.Deferred();
       defer.notify('getByUserName', arguments, false);

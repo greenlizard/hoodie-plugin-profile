@@ -47,6 +47,19 @@ suite('Profile', function () {
         })
     });
 
+    test('hommer should search a m term', function (done) {
+      this.timeout(15000);
+      hoodie.profile.search('m')
+        .fail(function (err) {
+          assert.ok(false, err.message);
+          done();
+        })
+        .then(function (task) {
+          done();
+          assert.ok(task.profile.search.length === 4 , 'search ok');
+        });
+    });
+
     test('hommer should get by getUserId lisa', function (done) {
       this.timeout(15000);
       hoodie.profile.get(_.find(window.fixtures.users, { username: 'Lisa' }).hoodieId)
@@ -72,7 +85,6 @@ suite('Profile', function () {
           assert.ok((task.profile.userName ==='lisa'), 'getProfile');
         });
     });
-
 
     test('hommer should update own profile', function (done) {
       this.timeout(10000);
