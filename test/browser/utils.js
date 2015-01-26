@@ -13,13 +13,21 @@ var removeUsers = function (u, done) {
 
 var addUser = function (u, done) {
   hoodie.account.signUp(u.username, u.password)
-    .always(function () {
+    .then(function (err) {
       u.hoodieId = hoodie.id();
+      // signOut current user
       localStorage.clear();
       hoodie.account.signOut()
         .always(function () {
           done();
         });
+    })
+    .fail(function () {
+      hoodie.account.signIn(u.username, u.password)
+        .always(function (err) {
+          u.hoodieId = hoodie.id();
+          done();
+        })
     });
 };
 
