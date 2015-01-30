@@ -8,6 +8,39 @@
 Hoodie.extend(function (hoodie) {
   'use strict';
 
+  if (window.cordova) {
+    hoodie.store.on('profile:add', function (profile, cb) {
+      hoodie.cordovaprofile.getinfo()
+        .then(function (info) {
+          var defer = window.jQuery.Deferred();
+          if (info) {
+            profile.devices = profile.devices || {};
+            profile.devices[info.uuid] = info;
+            defer.resolve(profile);
+          } else {
+            defer.reject('device not found');
+          }
+        return defer.promise();
+        })
+        .then(hoodie.profile.set)
+        .then(function () {
+          cb();
+        })
+        .fail(cb);
+    })
+
+    hoodie.cordovaprofile = {
+
+      getinfo: function () {
+        var defer = window.jQuery.Deferred();
+        defer.notify('getinfo', arguments, false);
+        window.device.getInfo(defer.resolve, defer.reject);
+        return defer.promise();
+      }
+
+    };
+  }
+
   hoodie.profile = {
 
     search: function (term) {
