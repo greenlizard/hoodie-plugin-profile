@@ -54,31 +54,14 @@ Hoodie.extend(function (hoodie) {
       hoodie.task('profilesearch').start(task)
         .then(defer.resolve)
         .fail(defer.reject);
-      return defer.promise();
-    },
-
-    getByUserName: function (userName) {
-      var defer = window.jQuery.Deferred();
-      defer.notify('getByUserName', arguments, false);
-      if (!!userName) {
-        var task = {
-          profile: {
-            userName: userName
-          }
-        };
-        hoodie.task('profilegetbyusername').start(task)
-          .then(defer.resolve)
-          .fail(defer.reject);
-      } else {
-        defer.reject('must be pass userName as a parameter');
-      }
+      hoodie.remote.push();
       return defer.promise();
     },
 
     get: function (userId) {
       var defer = window.jQuery.Deferred();
       defer.notify('get', arguments, false);
-      if (!!userId) {
+      if (!!userId && userId !== hoodie.id()) {
         var task = {
           profile: {
             userId: userId
@@ -87,6 +70,7 @@ Hoodie.extend(function (hoodie) {
         hoodie.task('profileget').start(task)
           .then(defer.resolve)
           .fail(defer.reject);
+        hoodie.remote.push();
       } else {
         hoodie.store.find('profile', hoodie.id())
           .then(function (doc) {
