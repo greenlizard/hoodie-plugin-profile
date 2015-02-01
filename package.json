@@ -1,6 +1,6 @@
 {
   "name": "hoodie-plugin-profile",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "Profile Hoodie plugin",
   "main": "worker.js",
   "dependencies": {
