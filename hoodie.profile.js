@@ -36,7 +36,9 @@ Hoodie.extend(function (hoodie) {
               return v.doc;
             })
             .reduce(function (b, c) {
-              b[c._id.split('/').pop()] = c;
+              c.id = c._id.split('/').pop();
+              delete c._id;
+              b[c.id] = c;
               return b;
             }, result);
           defer.resolve(result);
