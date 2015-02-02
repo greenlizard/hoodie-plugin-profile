@@ -25,6 +25,27 @@ Hoodie.extend(function (hoodie) {
       return defer.promise();
     },
 
+    getAsObjects: function (userIds) {
+      var defer = window.jQuery.Deferred();
+      defer.notify('getProfilesAsAObject', arguments, false);
+      hoodie.profile.get(userIds)
+        .then(function (task) {
+          var result = {};
+          task.profile
+            .map(function (v) {
+              return v.doc;
+            })
+            .reduce(function (b, c) {
+              b[c._id.split('/').pop()] = c;
+              return b;
+            }, result);
+          defer.resolve(result);
+        })
+        .fail(defer.reject);
+
+      return defer.promise();
+    },
+
     get: function (userId) {
       var defer = window.jQuery.Deferred();
       defer.notify('get', arguments, false);

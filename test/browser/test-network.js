@@ -73,16 +73,30 @@ suite('Profile', function () {
         });
     });
 
-    test('hommer should get by userName lisa', function (done) {
+
+    test('hommer should get by getUserId lisa and moo', function (done) {
       this.timeout(15000);
-      hoodie.profile.getByUserName('lisa')
+      hoodie.profile.get([_.find(window.fixtures.users, { username: 'Lisa' }).hoodieId, _.find(window.fixtures.users, { username: 'Moo' }).hoodieId])
         .fail(function (err) {
           assert.ok(false, err.message);
           done();
         })
         .then(function (task) {
           done();
-          assert.ok((task.profile.userName ==='lisa'), 'getProfile');
+          assert.ok((task.profile.length === 2), 'getProfile');
+        });
+    });
+
+    test('hommer should get by getUserId lisa and moo as object', function (done) {
+      this.timeout(15000);
+      hoodie.profile.getAsObjects([_.find(window.fixtures.users, { username: 'Lisa' }).hoodieId, _.find(window.fixtures.users, { username: 'Moo' }).hoodieId])
+        .fail(function (err) {
+          assert.ok(false, err.message);
+          done();
+        })
+        .then(function (task) {
+          done();
+          assert.ok((task.profile), 'getProfile');
         });
     });
 
