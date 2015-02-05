@@ -10,12 +10,19 @@ install this: https://github.com/rnewson/couchdb-lucene
 configure the local.ini of couch db with follow lines
 
 ```
-[os_daemons]
-my_daemon = /opt/couchdb-lucene/target/couchdb-lucene-1.1.0-SNAPSHOT/bin/run
+[external]
+fti=/usr/bin/python /opt/couchdb-lucene/tools/couchdb-external-hook.py
 
-[httpd_global_handlers]
-_fti = {couch_httpd_proxy, handle_proxy_req, <<"http://127.0.0.1:5985">>}
+[httpd_db_handlers]
+_fti = {couch_httpd_external, handle_external_req, <<"fti">>}
 ```
+
+and couchdb-lucene with this:
+```
+[local]
+url = http://admin:admin@localhost:6003/
+```
+
 
 then:
 ```shell
