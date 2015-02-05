@@ -15,7 +15,7 @@ Hoodie.extend(function (hoodie) {
       defer.notify('profilesearch', arguments, false);
       var task = {
         profile: {
-          term: term + '*'
+          term: 'name:' + term + '*'
         }
       };
       hoodie.task('profilesearch').start(task)
