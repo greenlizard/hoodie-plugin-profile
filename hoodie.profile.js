@@ -32,6 +32,9 @@ Hoodie.extend(function (hoodie) {
         .then(function (task) {
           var result = {};
           task.profile
+            .filter(function (v) {
+              return (v.doc);
+            })
             .map(function (v) {
               return v.doc;
             })
@@ -80,6 +83,13 @@ Hoodie.extend(function (hoodie) {
         .then(defer.resolve)
         .fail(defer.reject);
       return defer.promise();
+    },
+
+    update: function (updatedProfile, userId) {
+     return hoodie.profile.get(userId)
+       .then(function (profile) {
+         return hoodie.profile.set(window.jQuery.extend(profile.profile, updatedProfile));
+       });
     }
   };
 
